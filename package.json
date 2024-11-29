@@ -39,5 +39,9 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "marked": "^15.0.3",
     "react": "^18.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KAY-DEVPV-2o2/markdown-previewer"
   }
 }

@@ -1,48 +1,50 @@
 import React, { useState } from 'react';
-import marked from 'marked';
 import './App.css';
+import Editor from './components/Editor';
+import Preview from './components/Preview';
+import Footer from './components/Footer';
 
 function App() {
-  // Initial markdown text with a variety of elements for testing
-  const initialMarkdown = `# Heading 1
-## Heading 2
-[Link to FreeCodeCamp](https://www.freecodecamp.org)
+  const initialMarkdown = `
+# Welcome to My React Markdown Previewer!
+
+## This is a sub-heading...
+### And here's some other cool stuff:
+
+[FreeCodeCamp](https://www.freecodecamp.org/)
+
 \`Inline code\`
+
 \`\`\`
 Code block
 \`\`\`
+
 - List item 1
 - List item 2
+
 > Blockquote
-![Image](https://via.placeholder.com/150)
-**Bold text**`;
+
+![React Logo](https://reactjs.org/logo-og.png)
+
+**Bold text**
+`;
 
   const [markdown, setMarkdown] = useState(initialMarkdown);
 
-  // Function to update the preview as user types
   const handleChange = (event) => {
     setMarkdown(event.target.value);
   };
 
-  // Custom function to add <br> for carriage returns
-  const renderMarkdownWithLineBreaks = (markdownText) => {
-    const rawHTML = marked.parse(markdownText);
-    // Replace carriage returns with <br />
-    return rawHTML.replace(/(?:\r\n|\n|\r)/g, '<br />');
-  };
-
   return (
-    <div className="App">
-      <textarea
-        id="editor"
-        value={markdown}
-        onChange={handleChange}
-        placeholder="Type your markdown here..."
-      />
-      <div
-        id="preview"
-        dangerouslySetInnerHTML={{ __html: renderMarkdownWithLineBreaks(markdown) }}
-      />
+    <div className="app">
+      <header>
+        <h1 className="app-title">Markdown Previewer</h1>
+      </header>
+      <main>
+        <Editor value={markdown} onChange={handleChange} />
+        <Preview content={markdown} />
+      </main>
+      <Footer />
     </div>
   );
 }
